@@ -7,16 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
 
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 </head>
 
 <body>
     <header>
         <!-- header -->
+        <h1>Weather Dashboard</h1>
     </header>
     <aside>
         <!-- search -->
         <form id="searchForm">
+            <h3>Search for a City:</h3>
             <input id="searchInput" type="text" placeholder="Chicago">
             <button type="submit">Search</button>
         </form>
@@ -30,7 +34,7 @@
         <!-- current weather -->
         <div id="currentWeather"></div>
         <!-- 5 day forecast -->
-        <h3>5-Day Forecast</h3>
+        <h3>5-Day Forecast:</h3>
         <div id="fiveDayWeather"></div>
     </main>
     <script src="./assets/script/script.js"></script>

@@ -34,7 +34,18 @@ function displayCurrentWeather(currentCityData, cityName) {
     let weatherIcon = `http://openweathermap.org/img/wn/${currentCityData.weather[0].icon}.png`;
     // todo: add Wind, humidity, UV index DONT FORGET UNITS
     // create dynamic bg for uv index by adding class based on value of uv
-    document.querySelector("#currentWeather").innerHTML = `<h2>${cityName} ${moment.unix(currentCityData.dt).format("MMM Do YY")} <img src="${weatherIcon}"></h2> <div>Temp: ${currentCityData.temp} \xB0F</div>`;
+    document.querySelector("#currentWeather").innerHTML = `<h2>${cityName}, ${moment.unix(currentCityData.dt).format("MMM Do YY")} <img src="${weatherIcon}"></h2> <div>Temp: ${currentCityData.temp} \xB0F</div> <div>Wind Speed: ${currentCityData.wind_speed} MPH</div> <div>Humidity: ${currentCityData.humidity}%</div> <div id="uvIndex">UV Index: ${currentCityData.uvi}</div>`;
+    if (currentCityData.uvi >= 0 && currentCityData.uvi < 3) {
+        document.querySelector("#uvIndex").classList.add("uvLow");
+    } else if (currentCityData.uvi >= 3 && currentCityData.uvi < 6) {
+        document.querySelector("#uvIndex").classList.add("uvModerate");
+    } else if (currentCityData.uvi >= 6 && currentCityData.uvi < 8) {
+        document.querySelector("#uvIndex").classList.add("uvHigh");
+    } else if (currentCityData.uvi >= 8 && currentCityData.uvi < 11) {
+        document.querySelector("#uvIndex").classList.add("uvVeryHigh");
+    } else {
+        document.querySelector("#uvIndex").classList.add("uvExtreme");
+    }
 }
 
 function displayFiveDayWeather(fiveDayCityData) {
@@ -44,7 +55,7 @@ function displayFiveDayWeather(fiveDayCityData) {
     cityData.forEach((day) => {
         let weatherIcon = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
         // todo: temp, wind, humidity DONT FORGET UNITS ()
-        document.querySelector("#fiveDayWeather").innerHTML += `<div><div>${moment.unix(day.dt).format("MMM Do YY")}</div> <div><img src="${weatherIcon}"></div></div>`;
+        document.querySelector("#fiveDayWeather").innerHTML += `<div><div>${moment.unix(day.dt).format("MMM Do YY")}</div> <div><img src="${weatherIcon}"></div> <div>Temp: ${day.temp.day} \xB0F</div> <div>Wind Speed: ${day.wind_speed} MPH</div> <div>Humidity: ${day.humidity}%</div></div>`;
     });
 }
 

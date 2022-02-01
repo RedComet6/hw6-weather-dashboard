@@ -1,0 +1,19 @@
+.uvLow {
+    background-color: green;
+}
+
+.uvModerate {
+    background-color: yellow;
+}
+
+.uvHigh {
+    background-color: orange;
+}
+
+.uvVeryHigh {
+    background-color: red;
+}
+
+.uvExtreme {
+    background-color: violet;
+}
