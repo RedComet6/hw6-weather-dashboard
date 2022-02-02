@@ -1,4 +1,5 @@
 // variables
+const searchCities = [];
 
 // functions
 function handleCoords(searchCity) {
@@ -6,10 +7,17 @@ function handleCoords(searchCity) {
 
     fetch(fetchUrl)
         .then(function (response) {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("There was an issue with the response");
+            }
         })
         .then(function (data) {
             handleCurrentWeather(data.coord, data.name);
+        })
+        .catch((error) => {
+            console.log("Error");
         });
 }
 
@@ -60,9 +68,19 @@ function displayFiveDayWeather(fiveDayCityData) {
 }
 
 function handleFormSubmit(event) {
+    document.querySelector("#searchHistory").innerHTML = "";
     event.preventDefault();
+
     const city = document.querySelector("#searchInput").value.trim();
-    document.querySelector("#searchHistory").innerHTML += `<button data-city="${city}">${city}</button>`;
+    searchCities.push(city.toLowerCase());
+
+    const filteredCities = searchCities.filter((city, index) => {
+        return searchCities.indexOf(city) === index;
+    });
+
+    filteredCities.forEach((city) => {
+        document.querySelector("#searchHistory").innerHTML += `<button data-city="${city}">${city}</button>`;
+    });
     handleCoords(city);
 }
 
