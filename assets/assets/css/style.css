@@ -1,3 +1,12 @@
+/* classes to style element backgrounds */
+.bg-cyan {
+    background-color: cyan;
+}
+
+.bg-orange {
+    background-color: orange;
+}
+
 /* classes to style the background of the UV index */
 .uvLow {
     background-color: green;
