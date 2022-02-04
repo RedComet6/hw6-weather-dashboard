@@ -77,7 +77,7 @@ function displayFiveDayWeather(fiveDayCityData) {
         // icon representing weather conditions
         let weatherIcon = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
         // adds rows of information and displays values
-        document.querySelector("#fiveDayWeather").innerHTML += `<div class="bg-dark card m-1 p-2 text-white"><div class="h3">${moment.unix(day.dt).format("MMM Do YY")}</div> <div><img src="${weatherIcon}"></div> <div>Temp: ${day.temp.day} \xB0F</div> <div>Wind Speed: ${day.wind_speed} MPH</div> <div>Humidity: ${day.humidity}%</div></div>`;
+        document.querySelector("#fiveDayWeather").innerHTML += `<div class="bg-secondary card m-1 p-2 text-white"><div class="h3">${moment.unix(day.dt).format("MMM Do YY")}</div> <div><img src="${weatherIcon}"></div> <div>Temp: ${day.temp.day} \xB0F</div> <div>Wind Speed: ${day.wind_speed} MPH</div> <div>Humidity: ${day.humidity}%</div></div>`;
     });
 }
 
