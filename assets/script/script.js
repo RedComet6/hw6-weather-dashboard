@@ -4,7 +4,7 @@ const searchCities = [];
 // functions
 // finds the latitude and longitude of input
 function handleCoords(searchCity) {
-    const fetchUrl = `http://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=4b9f7dc3f8536150bc0eb915e8e4a81b`;
+    const fetchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=4b9f7dc3f8536150bc0eb915e8e4a81b`;
 
     fetch(fetchUrl)
         .then(function (response) {
@@ -46,7 +46,7 @@ function handleCurrentWeather(coordinates, city) {
 // displays information in current weather area
 function displayCurrentWeather(currentCityData, cityName) {
     // icon representing weather conditions
-    let weatherIcon = `http://openweathermap.org/img/wn/${currentCityData.weather[0].icon}.png`;
+    let weatherIcon = `https://openweathermap.org/img/wn/${currentCityData.weather[0].icon}.png`;
     // adds "card" styling from Bootstrap, is not added in index.html because initializing with the card style causes an annoying background empty space
     document.querySelector("#currentWeather").classList.add("card");
     // adds rows of information and displays values
@@ -75,7 +75,7 @@ function displayFiveDayWeather(fiveDayCityData) {
     // creates a card for each day and displays the relevant information inside the card
     cityData.forEach((day) => {
         // icon representing weather conditions
-        let weatherIcon = `http://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+        let weatherIcon = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
         // adds rows of information and displays values
         document.querySelector("#fiveDayWeather").innerHTML += `<div class="bg-dark card m-1 p-2 text-white"><div class="h3">${moment.unix(day.dt).format("MMM Do YY")}</div> <div><img src="${weatherIcon}"></div> <div>Temp: ${day.temp.day} \xB0F</div> <div>Wind Speed: ${day.wind_speed} MPH</div> <div>Humidity: ${day.humidity}%</div></div>`;
     });
