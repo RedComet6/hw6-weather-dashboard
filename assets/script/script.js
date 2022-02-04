@@ -1,5 +1,5 @@
 // variables
-const searchCities = [];
+const searchCities = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 // functions
 // finds the latitude and longitude of input
@@ -50,7 +50,7 @@ function displayCurrentWeather(currentCityData, cityName) {
     // adds "card" styling from Bootstrap, is not added in index.html because initializing with the card style causes an annoying background empty space
     document.querySelector("#currentWeather").classList.add("card");
     // adds rows of information and displays values
-    document.querySelector("#currentWeather").innerHTML = `<h2 class="h2">${cityName}, ${moment.unix(currentCityData.dt).format("MMM Do YY")} <img src="${weatherIcon}"></h2> <div>Temp: ${currentCityData.temp} \xB0F</div> <div>Wind Speed: ${currentCityData.wind_speed} MPH</div> <div>Humidity: ${currentCityData.humidity}%</div> <div>UV Index: <span  id="uvIndex" class="px-2">${currentCityData.uvi}</span></div>`;
+    document.querySelector("#currentWeather").innerHTML = `<h2 class="h2">${cityName}, ${moment.unix(currentCityData.dt).format("MMM Do YY")} <img src="${weatherIcon}"></h2> <div>Temp: ${currentCityData.temp} \xB0F</div> <div>Wind Speed: ${currentCityData.wind_speed} MPH</div> <div>Humidity: ${currentCityData.humidity}%</div> <div>UV Index: <span  id="uvIndex" class="text-white px-2">${currentCityData.uvi}</span></div>`;
     // checks how severe the UV Index is, and changes background color of data to indicate severity
     if (currentCityData.uvi >= 0 && currentCityData.uvi < 3) {
         document.querySelector("#uvIndex").classList.add("uvLow");
@@ -96,13 +96,20 @@ function handleFormSubmit(event) {
     const filteredCities = searchCities.filter((city, index) => {
         return searchCities.indexOf(city) === index;
     });
+    // sends
+    localStorage.setItem("cityHistory", JSON.stringify(filteredCities));
 
     // creates clickable button for each city in the history array
-    filteredCities.forEach((city) => {
-        document.querySelector("#searchHistory").innerHTML += `<button class="btn btn-secondary d-block m-2" data-city="${city}">${city}</button>`;
-    });
+    displayHistory(filteredCities);
     // finds the latitude and longitude of input
     handleCoords(city);
+}
+
+// creates clickable button for each city in the history array
+function displayHistory(cities) {
+    cities.forEach((city) => {
+        document.querySelector("#searchHistory").innerHTML += `<button class="btn btn-secondary d-block mx-auto my-2" data-city="${city}">${city}</button>`;
+    });
 }
 
 // runs data retrieval if user clicks on a search history button
@@ -112,6 +119,9 @@ function handleHistory(event) {
     // finds the latitude and longitude of input
     handleCoords(city);
 }
+
+// display search history from local storage
+displayHistory(searchCities);
 
 // listeners
 // data retrieval when user uses the form
